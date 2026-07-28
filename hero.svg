@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 330" width="1200" height="330" role="img" aria-label="Anuj Srivastava — software engineer, AI/ML">
+
+  <defs>
+    <clipPath id="card">
+      <rect x="0" y="0" width="1200" height="330" rx="18"/>
+    </clipPath>
+
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#0B1220"/>
+      <stop offset="60%" stop-color="#0A1019"/>
+      <stop offset="100%" stop-color="#0D1626"/>
+    </linearGradient>
+
+    <linearGradient id="fadeLeft" gradientUnits="userSpaceOnUse" x1="180" y1="0" x2="620" y2="0">
+      <stop offset="0%"   stop-color="#000000"/>
+      <stop offset="55%"  stop-color="#8A8A8A"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+
+    <mask id="mapFade">
+      <rect x="0" y="0" width="1200" height="330" fill="url(#fadeLeft)"/>
+    </mask>
+
+    <mask id="typeWipe">
+      <rect x="56" y="120" width="0" height="64" fill="#fff">
+        <animate attributeName="width" from="0" to="470" dur="0.85s" begin="0.25s" fill="freeze" calcMode="spline" keySplines="0.16 1 0.3 1"/>
+      </rect>
+    </mask>
+
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <filter id="softer" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="11"/>
+    </filter>
+
+    <radialGradient id="vignette" cx="0.78" cy="0.42" r="0.75">
+      <stop offset="0%"   stop-color="#5BE0C8" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#5BE0C8" stop-opacity="0"/>
+    </radialGradient>
+
+    <path id="routeA" d="M -40 252 C 160 252 220 178 400 178 L 760 178 C 920 178 980 238 1240 238"/>
+    <path id="routeB" d="M -40 96 C 140 96 210 42 340 42 L 900 42 C 1020 42 1078 94 1240 94"/>
+  </defs>
+
+  <style>
+    .mono { font-family: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace; }
+    .sans { font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif; }
+
+    .casing { stroke: #16202F; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .road   { stroke: #253449; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .minor  { stroke: #182334; fill: none; stroke-linecap: round; }
+
+    .flow {
+      stroke: #5BE0C8; fill: none; stroke-width: 2.2; stroke-linecap: round;
+      stroke-dasharray: 3 13; animation: flow 2.6s linear infinite;
+    }
+    @keyframes flow { to { stroke-dashoffset: -32; } }
+
+    .ping { transform-origin: center; animation: ping 3.4s ease-out infinite; }
+    @keyframes ping {
+      0%   { r: 4;  opacity: .85; }
+      70%  { r: 22; opacity: 0; }
+      100% { r: 22; opacity: 0; }
+    }
+
+    .caret { animation: blink 1.15s steps(1) infinite; animation-delay: 1.15s; }
+    @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+
+    .rise { opacity: 0; animation: rise .7s cubic-bezier(.16,1,.3,1) forwards; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flow, .ping, .caret, .rise, .veh { animation: none !important; }
+      .rise { opacity: 1; transform: none; }
+    }
+  </style>
+
+  <g clip-path="url(#card)">
+
+    <rect width="1200" height="330" fill="url(#ground)"/>
+    <rect width="1200" height="330" fill="url(#vignette)"/>
+
+    <!-- ── map layer ─────────────────────────────────────────── -->
+    <g mask="url(#mapFade)">
+
+      <!-- minor grid -->
+      <g class="minor" stroke-width="1" opacity="0.85">
+        <path d="M -40 316 L 1240 296"/>
+        <path d="M 430 372 L 566 178"/>
+        <path d="M 1010 372 L 1010 238"/>
+        <path d="M 168 -30 L 168 372"/>
+        <path d="M 792 42 L 792 -30"/>
+      </g>
+
+      <!-- arterials: casing then fill -->
+      <g class="casing" stroke-width="11">
+        <use xlink:href="#routeB" href="#routeB"/>
+        <path d="M 262 -30 L 262 132 C 262 178 302 216 358 216 L 358 372"/>
+        <path d="M 640 -30 L 640 372"/>
+        <path d="M 884 -30 L 884 42 C 884 98 932 132 992 132 L 1240 132"/>
+      </g>
+      <g class="road" stroke-width="6">
+        <use xlink:href="#routeB" href="#routeB"/>
+        <path d="M 262 -30 L 262 132 C 262 178 302 216 358 216 L 358 372"/>
+        <path d="M 640 -30 L 640 372"/>
+        <path d="M 884 -30 L 884 42 C 884 98 932 132 992 132 L 1240 132"/>
+      </g>
+
+      <!-- the active route -->
+      <g class="casing" stroke-width="12"><use xlink:href="#routeA" href="#routeA"/></g>
+      <g class="road" stroke-width="7"><use xlink:href="#routeA" href="#routeA"/></g>
+      <g opacity="0.28" filter="url(#soft)">
+        <use xlink:href="#routeA" href="#routeA" stroke="#5BE0C8" stroke-width="7" fill="none"/>
+      </g>
+      <use xlink:href="#routeA" href="#routeA" class="flow"/>
+
+      <!-- junction nodes -->
+      <g>
+        <circle cx="640" cy="178" r="4" fill="#5BE0C8" opacity="0.9"/>
+        <circle cx="640" cy="178" fill="none" stroke="#5BE0C8" stroke-width="1.2" class="ping"/>
+
+        <circle cx="358" cy="216" r="3" fill="#5BE0C8" opacity="0.55"/>
+        <circle cx="992" cy="132" r="3" fill="#5BE0C8" opacity="0.55"/>
+
+        <!-- single amber marker: the one deviation flag -->
+        <circle cx="884" cy="42" r="4" fill="#FFA94D"/>
+        <circle cx="884" cy="42" fill="none" stroke="#FFA94D" stroke-width="1.2" class="ping" style="animation-delay:1.2s"/>
+      </g>
+
+      <!-- vehicle tracing the active route -->
+      <g class="veh">
+        <circle r="12" fill="#FFA94D" opacity="0.30" filter="url(#softer)">
+          <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+            <mpath xlink:href="#routeA" href="#routeA"/>
+          </animateMotion>
+        </circle>
+        <circle r="3.6" fill="#FFD9A8">
+          <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+            <mpath xlink:href="#routeA" href="#routeA"/>
+          </animateMotion>
+        </circle>
+      </g>
+      <g class="veh">
+        <circle r="2.6" fill="#5BE0C8" opacity="0.75">
+          <animateMotion dur="14s" begin="-4s" repeatCount="indefinite">
+            <mpath xlink:href="#routeB" href="#routeB"/>
+          </animateMotion>
+        </circle>
+      </g>
+    </g>
+
+    <!-- ── type layer ────────────────────────────────────────── -->
+
+    <g class="rise" style="transform: translateY(10px); animation-delay:.05s">
+      <rect x="56" y="79" width="7" height="7" fill="#5BE0C8"/>
+      <text x="75" y="86" class="mono" font-size="11" letter-spacing="3.4" fill="#5BE0C8">
+        SDE INTERN — HERE TECHNOLOGIES
+      </text>
+    </g>
+
+    <g mask="url(#typeWipe)">
+      <text x="56" y="166" class="sans" font-size="52" font-weight="600" letter-spacing="-1.4" fill="#E8EEF6">
+        Anuj Srivastava
+      </text>
+    </g>
+    <rect class="caret" x="470" y="128" width="4" height="42" fill="#5BE0C8" opacity="0"/>
+
+    <g class="rise" style="transform: translateY(10px); animation-delay:.95s">
+      <text x="57" y="200" class="mono" font-size="13.5" fill="#8496AB" letter-spacing="0.2">
+        i build systems that ship — pipelines, parsers, products.
+      </text>
+
+      <rect x="57" y="224" width="380" height="1" fill="#1E2B3D"/>
+
+      <text x="57" y="252" class="mono" font-size="12" fill="#5BE0C8" letter-spacing="0.4">bankxlai.in</text>
+      <text x="147" y="252" class="mono" font-size="12" fill="#3B4C63">·</text>
+      <text x="163" y="252" class="mono" font-size="12" fill="#8496AB" letter-spacing="0.4">github.com/anuj1o0</text>
+    </g>
+
+    <g class="rise" style="transform: translateY(6px); animation-delay:1.35s">
+      <text x="57" y="292" class="mono" font-size="10" fill="#42556E" letter-spacing="2.2">
+        19.0760° N  72.8777° E  ·  MUMBAI, IN
+      </text>
+    </g>
+
+    <rect x="0.5" y="0.5" width="1199" height="329" rx="18" fill="none" stroke="#1B283A" stroke-width="1"/>
+  </g>
+</svg>
